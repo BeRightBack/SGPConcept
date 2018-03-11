@@ -145,4 +145,13 @@
   <data name="Test" xml:space="preserve">
     <value>This is a test</value>
   </data>
+  <data name="party" xml:space="preserve">
+    <value>Party</value>
+  </data>
+  <data name="store" xml:space="preserve">
+    <value>Store</value>
+  </data>
+  <data name="storeTitle" xml:space="preserve">
+    <value>SGP Concept Store</value>
+  </data>
 </root>

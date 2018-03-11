@@ -1,0 +1,29 @@
+﻿
+@model ProductsListViewModel
+<div class="navbar navbar-inverse bg-inverse" role="navigation">
+    <div class="row">
+        <a class="col navbar-brand" href="#">STORE</a>
+        <div class="col-4 text-right">
+            @await Component.InvokeAsync("CartSummary")
+        </div>
+    </div>
+</div>
+<div class="row m-1 p-1 body-content">
+    <div id="categories" class="col-2">
+        @await Component.InvokeAsync("NavigationMenu")
+    </div>
+    <div class="col-10 container-fluid">
+        @foreach (var p in Model.Products)
+        {
+        @Html.Partial("ProductSummary", p)
+        }
+
+
+        <div page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"
+             page-class="btn" page-class-normal="btn-secondary"
+             page-class-selected="btn-primary" page-url-category="@Model.CurrentCategory"
+             class="btn-group pull-right m-1">
+        </div>
+    </div>
+    
+</div>

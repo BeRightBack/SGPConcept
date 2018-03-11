@@ -6,10 +6,14 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using SGPConcept.Models;
+using SGPConcept.Models.Store;
 using SGPConcept.Resources;
 
 namespace SGPConcept
@@ -29,6 +33,24 @@ namespace SGPConcept
             services.AddSingleton<LocService>();
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 
+            services.AddDbContext<ApplicationDbContext>(options =>
+                 options.UseSqlServer(
+                    Configuration["Data:SGPConceptProducts:ConnectionString"]));
+
+            //services.AddDbContext<AppIdentityDbContext>(options =>
+            //    options.UseSqlServer(
+            //        Configuration["Data:SGPConceptIdentity:ConnectionString"]));
+
+            //services.AddIdentity<IdentityUser, IdentityRole>()
+            //    .AddEntityFrameworkStores<AppIdentityDbContext>()
+            //    .AddDefaultTokenProviders();
+
+            services.AddTransient<IProductRepository, EFProductRepository>();
+
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IOrderRepository, EFOrderRepository>();
+
             services.AddMvc()
                 .AddViewLocalization()
                 .AddDataAnnotationsLocalization(options =>
@@ -39,6 +61,9 @@ namespace SGPConcept
                         return factory.Create("SharedResource", assemblyName.Name);
                     };
                 });
+
+            services.AddMemoryCache();
+            services.AddSession();
 
             services.Configure<RequestLocalizationOptions>(
                 options =>
@@ -75,14 +100,41 @@ namespace SGPConcept
             var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(locOptions.Value);
 
+            app.UseStatusCodePages();
+
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                     name: null,
+                     template: "{category}/Page{productPage:int}",
+                     defaults: new { controller = "Product", action = "List" }
+                );
+
+                routes.MapRoute(
+                    name: null,
+                    template: "Page{productPage:int}",
+                    defaults: new { controller = "Product", action = "List", productPage = 1 }
+                );
+
+                routes.MapRoute(
+                    name: null,
+                    template: "{category}",
+                    defaults: new { controller = "Product", action = "List", productPage = 1 }
+                );
+
+                routes.MapRoute(
+                    name: null,
+                    template: "",
+                    defaults: new { controller = "Product", action = "List", productPage = 1 }
+                );
+
+                routes.MapRoute(name: null, template: "{controller}/{action}/{id?}");
             });
+            SeedData.EnsurePopulated(app);
         }
     }
 }

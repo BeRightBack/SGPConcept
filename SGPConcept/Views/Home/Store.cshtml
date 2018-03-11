@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "SGP Concept Store";
+}
+
+<h2>@lng("storeTitle")</h2>
+
+@functions {
+
+    string lng(string txt)
+    {
+        var msg = @SharedLocalizer.GetLocalizedHtmlString(txt);
+        return msg;
+    }
+}
+

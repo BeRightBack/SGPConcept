@@ -21,6 +21,7 @@ namespace SGPConcept.Resources
         public LocalizedString GetLocalizedHtmlString(string key)
         {
             return _localizer[key];
-        }
+        }       
+
     }
 }

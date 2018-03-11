@@ -1,0 +1,28 @@
+﻿@model IEnumerable<GuestResponse>
+
+@{
+    ViewData["Title"] = "Responses";
+}
+
+<div class="panel-body">
+    <h2>Here is the list of people attending the party</h2>
+    <table class="table table-sm table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (GuestResponse r in Model)
+            {
+                <tr>
+                    <td>@r.Name</td>
+                    <td>@r.Email</td>
+                    <td>@r.Phone</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

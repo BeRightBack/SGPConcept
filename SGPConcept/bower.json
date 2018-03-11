@@ -1,0 +1,21 @@
+{
+  "name": "asp.net",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "4.0.0-alpha.6",
+    "fontawesome": "4.7.0",
+    "jquery": "3.2.1",
+    "jquery-validation": "1.17.0",
+    "jquery-validation-unobtrusive": "3.2.6",
+    "cldr-data": "29.0.0",
+    "globalize": "v0.1.1",
+    "jquery-validation-globalize": "1.0.0",
+    "cldrjs": "0.5.0"
+  },
+  "resolutions": {
+    "globalize": "^1.0.0",
+    "jquery": "3.2.1",
+    "cldrjs": "0.5.0",
+    "jquery-validation": "1.17.0"
+  }
+}

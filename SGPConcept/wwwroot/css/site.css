@@ -1,27 +1,30 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-top: 4rem;
+    padding-bottom: 3rem;
+    color: #5a5a5a;
 }
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 5rem;
+    padding-right: 5rem;
 }
+
+
 
 /* Carousel */
-.carousel-caption p {
+/*.carousel-caption p {
     font-size: 20px;
     line-height: 1.4;
-}
+}*/
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
+ Make .svg files in the carousel display properly in older browsers 
+/*.carousel-inner .item img[src$=".svg"] {
     width: 100%;
-}
+}*/
 
-/* QR code generator */
+ QR code generator 
 #qrCode {
     margin: 15px;
 }
@@ -32,4 +35,38 @@
     .carousel-caption {
         display: none;
     }
+}
+/*================================================================================================================================================================*/
+/*                                                                            Added                                                                               */
+/*================================================================================================================================================================*/
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+/*a.nav-link {
+    color: #fff;
+}*/
+
+.navbar-inverse .navbar-nav .nav-link {
+    color: rgba(255,255,255,.9);
+}
+.navbar-inverse .navbar-text {
+    color: rgba(198,239,241,.9);
 }

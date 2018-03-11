@@ -145,4 +145,13 @@
   <data name="about" xml:space="preserve">
     <value>À propos de nous</value>
   </data>
+  <data name="party" xml:space="preserve">
+    <value>Fête</value>
+  </data>
+  <data name="store" xml:space="preserve">
+    <value>Boutique</value>
+  </data>
+  <data name="storeTitle" xml:space="preserve">
+    <value>Boutique SGP Concept</value>
+  </data>
 </root>
